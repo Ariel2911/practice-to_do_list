@@ -9,13 +9,14 @@ import {
 } from '@nestjs/common';
 import { TasksService } from '../services/tasks.service';
 import { CreateTaskDto } from '../dto/create-task.dto';
+import { Task } from '../interfaces/Task';
 
 @Controller('tasks')
 export class TasksController {
   constructor(private readonly tasksServices: TasksService) {}
 
   @Get()
-  getTasks() {
+  getTasks(): Task[] {
     return this.tasksServices.getTasks();
   }
 

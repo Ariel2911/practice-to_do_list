@@ -18,8 +18,8 @@ export class TasksService {
     },
   ];
 
-  getTasks() {
-    return 'Lista de tareas';
+  getTasks(): Task[] {
+    return this.tasks;
   }
 
   getTask(id) {
