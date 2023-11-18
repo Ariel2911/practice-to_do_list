@@ -22,8 +22,12 @@ export class TasksService {
     return this.tasks;
   }
 
-  getTask(id) {
-    return id;
+  getTask(id): Task | string {
+    const result = this.tasks.find((task) => task.id === parseInt(id));
+
+    if (result === undefined) return 'Tarea no encontrada';
+
+    return result;
   }
 
   createTask(task) {
