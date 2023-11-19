@@ -10,6 +10,9 @@ export class Task {
 
   @Prop()
   description: string;
+
+  @Prop()
+  done: boolean;
 }
 
 export const TaskSchema = SchemaFactory.createForClass(Task);
