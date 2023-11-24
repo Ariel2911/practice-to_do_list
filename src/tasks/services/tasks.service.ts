@@ -1,9 +1,13 @@
 import { Injectable } from '@nestjs/common';
-import { Task } from '../interfaces/Task';
+import { ITask } from '../interfaces/Task';
+import { InjectModel } from '@nestjs/mongoose';
+import { Task } from '../schemas/task.schema';
+import { Model } from 'mongoose';
+import { CreateTaskDto } from '../dto/create-task.dto';
 
 @Injectable()
 export class TasksService {
-  tasks: Task[] = [
+  tasks: ITask[] = [
     {
       id: 1,
       title: 'Test',
@@ -18,11 +22,13 @@ export class TasksService {
     },
   ];
 
-  getTasks(): Task[] {
+  constructor(@InjectModel(Task.name) private taskModel: Model<Task>) {}
+
+  getTasks(): ITask[] {
     return this.tasks;
   }
 
-  getTask(id): Task | string {
+  getTask(id): ITask | string {
     const result = this.tasks.find((task) => task.id === parseInt(id));
 
     if (result === undefined) return 'Tarea no encontrada';
@@ -30,8 +36,9 @@ export class TasksService {
     return result;
   }
 
-  createTask(task) {
-    return task;
+  async createTask(createTaskDto: CreateTaskDto): Promise<Task> {
+    const createdTask = new this.taskModel(createTaskDto);
+    return createdTask.save();
   }
 
   updateTask(id, task) {
