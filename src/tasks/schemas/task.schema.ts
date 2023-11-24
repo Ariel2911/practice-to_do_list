@@ -3,7 +3,7 @@ import { HydratedDocument } from 'mongoose';
 
 export type TaskDocument = HydratedDocument<Task>;
 
-@Schema()
+@Schema({ timestamps: true, versionKey: false })
 export class Task {
   @Prop()
   title: string;
