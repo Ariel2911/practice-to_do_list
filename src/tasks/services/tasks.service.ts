@@ -24,8 +24,8 @@ export class TasksService {
 
   constructor(@InjectModel(Task.name) private taskModel: Model<Task>) {}
 
-  getTasks(): ITask[] {
-    return this.tasks;
+  async getTasks() {
+    return this.taskModel.find().exec();
   }
 
   getTask(id): ITask | string {
