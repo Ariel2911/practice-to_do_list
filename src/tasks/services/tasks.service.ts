@@ -28,8 +28,8 @@ export class TasksService {
     return this.taskModel.find().exec();
   }
 
-  getTask(id): ITask | string {
-    const result = this.tasks.find((task) => task.id === parseInt(id));
+  getTask(id: string) {
+    const result = this.taskModel.findOne({ _id: id });
 
     if (result === undefined) return 'Tarea no encontrada';
 

@@ -9,7 +9,6 @@ import {
 } from '@nestjs/common';
 import { TasksService } from '../services/tasks.service';
 import { CreateTaskDto } from '../dto/create-task.dto';
-import { ITask } from '../interfaces/Task';
 import { Task } from '../schemas/task.schema';
 
 @Controller('tasks')
@@ -22,7 +21,7 @@ export class TasksController {
   }
 
   @Get(':id')
-  getTask(@Param('id') id): ITask | string {
+  getTask(@Param('id') id: string) {
     return this.tasksServices.getTask(id);
   }
 
