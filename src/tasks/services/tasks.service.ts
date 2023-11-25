@@ -45,10 +45,10 @@ export class TasksService {
     return { id, task };
   }
 
-  async deleteTask(
-    id: string,
-  ): Promise<{ acknowledged: boolean; deletedCount: number }> {
-    const deleteTask = await this.taskModel.deleteOne({ _id: id });
+  async deleteTask(id: string): Promise<Task | string> {
+    const deleteTask = await this.taskModel.findByIdAndDelete(id);
+
+    if (deleteTask === null) return 'Tarea no encontrada';
 
     return deleteTask;
   }
