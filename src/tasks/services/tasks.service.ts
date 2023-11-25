@@ -33,7 +33,7 @@ export class TasksService {
   }
 
   async getTask(id: string): Promise<Task | string> {
-    const result = this.taskModel.findOne({ _id: id });
+    const result = await this.taskModel.findOne({ _id: id });
 
     if (result === undefined) return 'Tarea no encontrada';
 
