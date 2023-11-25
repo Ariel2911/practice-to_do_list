@@ -24,7 +24,11 @@ export class TasksService {
 
   constructor(@InjectModel(Task.name) private taskModel: Model<Task>) {}
 
-  async getTasks() {
+  async getTasks(): Promise<Task[] | string> {
+    const result = await this.taskModel.find().exec();
+
+    if (result.length < 1) return 'No hay tareas para mostrar';
+
     return this.taskModel.find().exec();
   }
 
