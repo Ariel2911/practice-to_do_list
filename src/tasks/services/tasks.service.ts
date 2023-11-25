@@ -45,8 +45,14 @@ export class TasksService {
     return await createdTask.save();
   }
 
-  updateTask(id, task) {
-    return { id, task };
+  async updateTask(id: string, task: Task): Promise<Task | string> {
+    try {
+      const updatedTask = await this.taskModel.findByIdAndUpdate(id, task);
+
+      return updatedTask;
+    } catch (error) {
+      return 'Tarea no encontrada';
+    }
   }
 
   async deleteTask(id: string): Promise<Task | string> {

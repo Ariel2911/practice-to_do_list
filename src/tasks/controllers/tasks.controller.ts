@@ -31,7 +31,7 @@ export class TasksController {
   }
 
   @Put(':id')
-  updateTask(@Param('id') id, @Body() task) {
+  updateTask(@Param('id') id, @Body() task): Promise<Task | string> {
     return this.tasksServices.updateTask(id, task);
   }
 
