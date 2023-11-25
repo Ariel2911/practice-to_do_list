@@ -45,7 +45,11 @@ export class TasksService {
     return { id, task };
   }
 
-  deleteTask(id) {
-    return id;
+  async deleteTask(
+    id: string,
+  ): Promise<{ acknowledged: boolean; deletedCount: number }> {
+    const deleteTask = await this.taskModel.deleteOne({ _id: id });
+
+    return deleteTask;
   }
 }
