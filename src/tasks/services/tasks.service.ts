@@ -1,5 +1,4 @@
 import { Injectable } from '@nestjs/common';
-import { ITask } from '../interfaces/Task';
 import { InjectModel } from '@nestjs/mongoose';
 import { Task } from '../schemas/task.schema';
 import { Model } from 'mongoose';
@@ -7,21 +6,6 @@ import { CreateTaskDto } from '../dto/create-task.dto';
 
 @Injectable()
 export class TasksService {
-  tasks: ITask[] = [
-    {
-      id: 1,
-      title: 'Test',
-      description: 'Test description',
-      done: false,
-    },
-    {
-      id: 2,
-      title: 'Test',
-      description: 'Test description',
-      done: false,
-    },
-  ];
-
   constructor(@InjectModel(Task.name) private taskModel: Model<Task>) {}
 
   async getTasks(): Promise<Task[] | string> {
@@ -42,6 +26,7 @@ export class TasksService {
 
   async createTask(createTaskDto: CreateTaskDto): Promise<Task> {
     const createdTask = new this.taskModel(createTaskDto);
+
     return await createdTask.save();
   }
 
