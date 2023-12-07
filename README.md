@@ -60,7 +60,7 @@ http://localhost:3000
 
 Este servidor se comunicará a travez de datos en formato JSON
 
-### Obtener todas las tasks
+### Obtener todas las tarea
 
 ```http
   GET /tacks
@@ -72,7 +72,7 @@ Respuesta:
 | :----- | :--------------------------------------------------------------------------- | :----------------------- |
 | `200`  | `[{"_id": string, "title": string, "description": string, "done": boolean}]` | Resultado de la busqueda |
 
-### Obtener una task
+### Obtener una tarea
 
 ```http
   GET /tacks/${id}
@@ -88,7 +88,7 @@ Respuesta:
 | :----- | :------------------------------------------------------------------------- | :----------------------- |
 | `200`  | `{"_id": string, "title": string, "description": string, "done": boolean}` | Resultado de la busqueda |
 
-### Crear una task
+### Crear una tarea
 
 ```http
   POST /tacks
@@ -106,7 +106,7 @@ Respuesta:
 | :----- | :------------------------------------------------------------------------- | :------------- |
 | `201`  | `{"_id": string, "title": string, "description": string, "done": boolean}` | Tarea agregada |
 
-### Modificar una task
+### Modificar una tarea
 
 ```http
   PUT /tacks/${id}
@@ -128,7 +128,7 @@ Respuesta:
 | :----- | :------------------------------------------------------------------------- | :--------------- |
 | `200`  | `{"_id": string, "title": string, "description": string, "done": boolean}` | Tarea modificada |
 
-### Eliminar una task
+### Eliminar una tarea
 
 ```http
   DELETE /tacks/${id}
