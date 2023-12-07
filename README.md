@@ -1,73 +1,157 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="200" alt="Nest Logo" /></a>
-</p>
+# API RESTful construida con NestJs, Typescript, MongoDB, Mongoose y Docker
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+Proyecto en construcción.
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+## Descripción
 
-## Description
+Este proyecto tiene como objetivo principal proporcionar una API RESTful que funcione como servidor, permitiendo que las aplicaciones cliente interactúen con una lista de tareas almacenadas en una base de datos.
+| Las funcionalidades disponibles para el cliente incluyen:
+$ Las funcionalidades disponibles para el cliente incluyen:
+~ Las funcionalidades disponibles para el cliente incluyen:
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+- **Solicitar una Lista de Tareas:** Recupera la lista completa de tareas almacenadas.
+- **Solicitar una Tarea Específica:** Obtiene detalles sobre una tarea específica según su id.
+- **Crear una Nueva Tarea:** Añade una nueva tarea a la lista.
+- **Actualizar una Tarea Existente:** Modifica el estado o detalles de una tarea existente.
+- **Borrar una Tarea Existente:** Elimina una tarea específica de la lista.
 
-## Installation
+Estas operaciones proporcionan una interfaz completa para la gestión dinámica de tareas a través de aplicaciones cliente conectadas a esta API RESTful.
+
+## Requisitos Previos
+
+Debes tener instalado Node.js, npm y docker.
+
+## Instalación
+
+1. Clonar el proyecto.
+2. Ir a la carpeta del proyecto.
+3. Instalar las dependencias.
 
 ```bash
-$ pnpm install
+$ npm install
 ```
 
-## Running the app
+## Ejecución
+
+Montar el contenedor con la base de datos.
+
+```bash
+$ sudo docker-compose up
+```
+
+Opciones para correr el servidor.
 
 ```bash
 # development
-$ pnpm run start
+$ npm run start
 
 # watch mode
-$ pnpm run start:dev
+$ npm run start:dev
 
 # production mode
-$ pnpm run start:prod
+$ npm run start:prod
 ```
 
-## Test
+## Punto de acceso
 
-```bash
-# unit tests
-$ pnpm run test
+http://localhost:3000
 
-# e2e tests
-$ pnpm run test:e2e
+## Uso
 
-# test coverage
-$ pnpm run test:cov
+Este servidor se comunicará a travez de datos en formato JSON
+
+### Obtener todas las tasks
+
+```http
+  GET /tacks
 ```
 
-## Support
+Respuesta:
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+| Status | Type                                                                         | Description              |
+| :----- | :--------------------------------------------------------------------------- | :----------------------- |
+| `200`  | `[{"_id": string, "title": string, "description": string, "done": boolean}]` | Resultado de la busqueda |
 
-## Stay in touch
+### Obtener una task
 
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+```http
+  GET /tacks/${id}
+```
 
-## License
+| Parameter | Type     | Description                           |
+| :-------- | :------- | :------------------------------------ |
+| `id`      | `string` | **Required**. Id de la tarea a buscar |
 
-Nest is [MIT licensed](LICENSE).
+Respuesta:
+
+| Status | Type                                                                       | Description              |
+| :----- | :------------------------------------------------------------------------- | :----------------------- |
+| `200`  | `{"_id": string, "title": string, "description": string, "done": boolean}` | Resultado de la busqueda |
+
+### Crear una task
+
+```http
+  POST /tacks
+```
+
+| Body          | Type      | Description                                  |
+| :------------ | :-------- | :------------------------------------------- |
+| `title`       | `string`  | **Required**. Valor que se almacena en la DB |
+| `description` | `string`  | **Required**. Valor que se almacena en la DB |
+| `done`        | `boolean` | **Required**. Valor que se almacena en la DB |
+
+Respuesta:
+
+| Status | Type                                                                       | Description    |
+| :----- | :------------------------------------------------------------------------- | :------------- |
+| `201`  | `{"_id": string, "title": string, "description": string, "done": boolean}` | Tarea agregada |
+
+### Modificar una task
+
+```http
+  PUT /tacks/${id}
+```
+
+| Parameter | Type     | Description                               |
+| :-------- | :------- | :---------------------------------------- |
+| `id`      | `string` | **Required**. Id de la tarea a actualizar |
+
+| Body          | Type      | Description                                  |
+| :------------ | :-------- | :------------------------------------------- |
+| `title`       | `string`  | **Required**. Valor que se almacena en la DB |
+| `description` | `string`  | **Required**. Valor que se almacena en la DB |
+| `done`        | `boolean` | **Required**. Valor que se almacena en la DB |
+
+Respuesta:
+
+| Status | Type                                                                       | Description      |
+| :----- | :------------------------------------------------------------------------- | :--------------- |
+| `200`  | `{"_id": string, "title": string, "description": string, "done": boolean}` | Tarea modificada |
+
+### Eliminar una task
+
+```http
+  DELETE /tacks/${id}
+```
+
+| Parameter | Type     | Description                             |
+| :-------- | :------- | :-------------------------------------- |
+| `id`      | `string` | **Required**. Id de la tarea a eliminar |
+
+Respuesta:
+
+| Status | Type                                                                       | Description     |
+| :----- | :------------------------------------------------------------------------- | :-------------- |
+| `200`  | `{"_id": string, "title": string, "description": string, "done": boolean}` | Tarea eliminada |
+
+## Base de Datos:
+
+Es una base de datos no relacional que se encuentra dentro del contenedor (MongoDB).
+
+## Licencia:
+
+[ISC](https://spdx.org/licenses/ISC.html)
+
+## Contacto:
+
+Email: ariel29111978@hotmail.com
