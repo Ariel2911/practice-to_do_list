@@ -17,11 +17,13 @@ export class TasksService {
   }
 
   async getTask(id: string): Promise<Task | string> {
-    const result = await this.taskModel.findOne({ _id: id });
+    try {
+      const result = await this.taskModel.findOne({ _id: id });
 
-    if (result === undefined) return 'Tarea no encontrada';
-
-    return result;
+      return result;
+    } catch (error) {
+      return 'Tarea no encontrada';
+    }
   }
 
   async createTask(createTaskDto: CreateTaskDto): Promise<Task> {
